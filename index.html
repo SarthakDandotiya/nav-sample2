@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+		<link
+			href="https://fonts.googleapis.com/css?family=Major+Mono+Display"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Nav Sample</title>
+	</head>
+	<body>
+		<h1 style="text-align:center">NAV-BAR</h1>
+
+		<div class="toggle-btn">
+			<span class="one"></span> <span class="two"></span>
+		</div>
+
+		<div class="menu-overlay">
+			<div class="block b1"></div>
+			<div class="block b2"></div>
+		</div>
+
+		<div class="menu">
+			<div class="data">
+				<ul>
+					<li><a href="#">home</a></li>
+					<li><a href="#">about</a></li>
+					<li><a href="#">services</a></li>
+					<li><a href="#">contact</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<script>
+			var t1 = new TimelineMax({ paused: true });
+
+			t1.to(".one", 0.5, {
+				y: 6,
+				rotation: 45,
+				ease: Expo.easeInOut
+			});
+			t1.to(".two", 0.5, {
+				y: -6,
+				rotation: -45,
+				ease: Expo.easeInOut,
+				delay: -0.5
+			});
+
+			t1.to(".menu", 1, {
+				top: "0%",
+				ease: Expo.easeInOut
+				// delay: -0.2
+			});
+
+			t1.to(".block", 0.8, {
+				width: "100%",
+				ease: Power4.easeInOut,
+				delay: -1
+			});
+
+			t1.staggerFrom(".menu", 0.15, {
+				x: -30,
+				opacity: 0,
+				ease: Expo.easeOut
+			});
+
+			t1.staggerFrom(
+				"ul li",
+				0.75,
+				{
+					x: -30,
+					opacity: 0,
+					ease: Expo.easeOut
+				},
+				0.2
+			);
+
+			t1.reverse();
+			$(document).on("click", ".toggle-btn", function() {
+				t1.reversed(!t1.reversed());
+			});
+			$(document).on("click", "a", function() {
+				t1.reversed(!t1.reversed());
+			});
+		</script>
+	</body>
+</html>
